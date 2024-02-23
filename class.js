@@ -5,55 +5,59 @@
 * Istanziare due oggetti delle classe creata e verificare se gli studenti sono maggiorenni o minorenni e stampare i loro dati.
 */
 
+//controllo che gli input siano validi con le regex
+function load() {
+    var nome = document.getElementById("nome").value;
+    var cognome = document.getElementById("cognome").value;
+    var matricola = document.getElementById("matricola").value;
+    var eta = document.getElementById("eta").value;
+
+    var regexNome = /^[a-zA-Z]+$/;
+    var regexCognome = /^[A-Za-z\s]+$/;
+    var regexMatricola = /^[a-zA-Z0-9]+$/; //lettere, numeri, no spazi, no punteggiatura
+
+    if (!regexNome.test(nome)) {
+        console.log(nome);
+        document.getElementById("alert").innerHTML = "Correggere il campo nome!";
+    }
+    else if (!regexCognome.test(cognome)) {
+        document.getElementById("alert").innerHTML = "Correggere il campo cognome!";
+    }
+    else if (!regexMatricola.test(matricola)) {
+        document.getElementById("alert").innerHTML = "Correggere il campo matricola!";
+    } else if (eta < 0 || eta > 99) {
+        document.getElementById("alert").innerHTML = "Correggere il campo eta'!";
+    }
+    else {
+        let studente = new Studente(nome, cognome, eta, matricola);
+        document.getElementById("alert").innerHTML = "";
+    }
+
+
+}
+//classe
 class Studente {
     constructor(nome, cognome, eta, matricola) {
         this.nome = nome;
         this.cognome = cognome;
         this.eta = eta;
         this.matricola = matricola;
-        let ritorno = this.checkValues();
-        if (ritorno) {
-            this.stampa();
-        }
-    }
+        this.stampa();
 
-    checkValues() {
-        var regexNome = /^[a-zA-Z]+$/;
-        var regexCognome = /^[A-Za-z\s]+$/;
-        var regexMatricola = /^[a-zA-Z0-9]+$/; //lettere, numeri, no spazi, no punteggiatura
-
-        if (!regexNome.test(nome)) {
-            console.log(nome);
-            console.log("ciao");
-            document.getElementById("alert").innerHTML = "Correggere il campo nome!";
-            document.getElementById("nome").focus;
-            return false;
-        }
-        else if (!regexCognome.test(cognome)) {
-            document.getElementById("alert").innerHTML = "Correggere il campo cognome!";
-            document.getElementById("cognome").focus;
-            return false;
-        }
-        else if (!regexMatricola.test(this.matricola)) {
-            document.getElementById("alert").innerHTML = "Matricola può contenere solo lettere e numeri";
-            document.getElementById("matricola").focus;
-            return false;
+        let str;
+        if (this.isMaggiorenne()) {
+            str = "maggiorenne"
         } else {
-            return true;
+            str = "minorenne"
         }
+        document.getElementById("maggiorenne").innerHTML = "Lo studente e' " + str;
     }
-
 
     stampa() {
         document.getElementById("stampa").innerHTML = this.nome + " " + this.cognome + ", " + this.eta + ", " + this.matricola;
     }
-}
 
-function load() {
-    let nome = document.modulo.nome.value;
-    let cognome = document.modulo.cognome.value;
-    let eta = document.modulo.eta.value;
-    let matricola = document.modulo.matricola.value;
-    
-    let studente = new Studente(nome, cognome, eta, matricola);
+    isMaggiorenne() {
+        return this.eta > 17; //true se maggiorenne, false altrimenti
+    }
 }
