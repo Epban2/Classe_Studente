@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classe studente La Rocca</title>
+</head>
+
+<body>
+    <h1>classi in javascript</h1>
+
+    <form name="modulo">
+        <table>
+            <tr>
+                <td><label for="nome">Nome</label></td>
+                <td><input type="text" name="nome" id="nome" placeholder="Nome"></td>
+            </tr>
+            <tr>
+                <td><label for="cognome">Cognome</label></td>
+                <td><input type="text" name="cognome" id="cognome" placeholder="Cognome"></td>
+            </tr>
+            <td>Età</td>
+            <td><input type="number" name="eta" id="eta" min="0" max="99"></td>
+            <tr>
+                <td>Matricola</td>
+                <td><input type="text" name="matricola" id="matricola" placeholder="Matricola"></td>
+            </tr>
+        </table>
+    </form>
+    <button onclick="load()">Invio</button>
+
+    <p id="stampa"></p>
+    <p id="alert" style="height: 20px; color: red;"></p>
+    <script src="class.js"></script>
+
+
+</body>
+
+</html>
